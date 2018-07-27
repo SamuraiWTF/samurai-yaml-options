@@ -39,12 +39,31 @@ module SamuraiYamlOptions
 
 
     def execute
-      @env.ui.say(:info, "Welcome to the SamuraiWTF target selector!")
+      @env.ui.say(:info, "Welcome to the SamuraiWTF options generator!")
 
       default_options = YAML.load_file('default-options.yaml')
 
-      selected_targets = get_item_selection(default_options, 'target')
-      selected_tools = get_item_selection(default_options, 'tool')
+      misc_settings = {}
+
+      misc_settings['name'] = @prompt.ask("What would you like to call this VM? (Default: '#{default_options['settings']['name']}')", default: default_options['settings']['name']) do |q|
+        q.validate(/^[a-zA-Z][a-zA-Z0-9\s]{5,47}$/, 'Invalid name. Must start with a letter, use only alphanumeric/spaces, have a length between 6 and 48.')
+      end
+
+      if @prompt.yes?("Setup the targets for training? (Y/n, default: #{default_options['settings']['targets'] ? 'Y' : 'n'} )")
+        misc_settings['targets'] = true
+        selected_targets = get_item_selection(default_options, 'target')
+      else
+        misc_settings['targets'] = false
+        selected_targets = []
+      end
+
+      if @prompt.yes?("Setup the GUI and desktop environment? (Y/n, default: #{default_options['settings']['gui'] ? 'Y' : 'n'} )")
+        misc_settings['gui'] = true
+        selected_tools = get_item_selection(default_options, 'tool')
+      else
+        misc_settings['gui'] = false
+        selected_tools = []
+      end
 
       write_file = if File.exists?('options.yaml')
         @prompt.yes?('An options.yaml file exists. Overwrite it? (Y/n)')
@@ -53,7 +72,7 @@ module SamuraiYamlOptions
       end
 
       if write_file
-        File.write('options.yaml', { 'targets' => selected_targets, 'tools' => selected_tools }.to_yaml)
+        File.write('options.yaml', { 'targets' => selected_targets, 'tools' => selected_tools, 'settings' => misc_settings }.to_yaml)
         @env.ui.say(:info, 'Options written to options.yaml')
       end
 
