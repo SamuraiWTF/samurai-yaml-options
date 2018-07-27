@@ -9,3 +9,8 @@
 
 # rspec failure tracking
 .rspec_status
+
+#local test files
+/target_install
+default-options.yaml
+options.yaml
