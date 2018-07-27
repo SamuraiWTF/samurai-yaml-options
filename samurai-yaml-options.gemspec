@@ -1,11 +1,11 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "vagrant-yaml-options/version"
+require "samurai-yaml-options/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "vagrant-yaml-options"
-  spec.version       = VagrantYamlOptions::VERSION
+  spec.name          = "samurai-yaml-options"
+  spec.version       = SamuraiYamlOptions::VERSION
   spec.authors       = ["Mic Whitehorn-Gillam"]
   spec.email         = ["mic@secureideas.com"]
 

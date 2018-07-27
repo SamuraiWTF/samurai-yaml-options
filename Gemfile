@@ -5,5 +5,5 @@ group :development do
 end
 
 group :plugins do
-  gem "vagrant-yaml-options", path: "."
+  gem "samurai-yaml-options", path: "."
 end

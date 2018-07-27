@@ -23,7 +23,7 @@ GIT
 PATH
   remote: .
   specs:
-    vagrant-yaml-options (0.1.0)
+    samurai-yaml-options (0.1.0)
       tty-prompt (~> 0.16.1)
 
 GEM
@@ -125,8 +125,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  samurai-yaml-options!
   vagrant!
-  vagrant-yaml-options!
 
 BUNDLED WITH
    1.16.1

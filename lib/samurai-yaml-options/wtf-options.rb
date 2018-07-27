@@ -2,7 +2,7 @@ require 'vagrant'
 require 'tty-prompt'
 require 'yaml'
 
-module VagrantYamlOptions
+module SamuraiYamlOptions
   class GenerateOptions < Vagrant.plugin('2', :command)
     def self.synopsis
       'Interactively generate an options.yaml'
@@ -37,9 +37,17 @@ module VagrantYamlOptions
         end
       end
 
-      # choices = all_targets #default_options['targets']
-      # selected_targets = @prompt.multi_select("Select your targets (enter when done)", choices)
-      @env.ui.say(:info, "Chose: #{selected_targets}")
+
+      write_file = if Files.exists?('options.yaml')
+        @prompt.yes?('An options.yaml file exists. Overwrite it?')
+      else
+        true
+      end
+
+      if write_file
+        @env.ui.say(:info, 'Write the file')
+      end
+
     end
 
   end
