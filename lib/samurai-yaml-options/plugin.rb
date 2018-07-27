@@ -9,7 +9,7 @@ class SamuraiYamlOptions::Plugin < Vagrant.plugin(2)
 
   command "wtf-options" do
     require_relative "wtf-options"
-    VagrantYamlOptions::GenerateOptions
+    SamuraiYamlOptions::GenerateOptions
   end
 
 end
