@@ -8,6 +8,7 @@ This current status of this plugin is relatively untested and not compatible wit
 
 Refer to Vagrant documentation for plugin development.
 You can find it at https://www.vagrantup.com/docs/plugins/
+Some test directories and files should also be stubbed in locally if testing with the vagrant gem rather than a production install.
 
 ## Contributing
 
